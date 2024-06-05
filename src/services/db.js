@@ -9,6 +9,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { sendTextMessage } from "./message";
 
 const getCoupleDoc = async (email) => {
   const coupleRef = collection(db, "couples");
@@ -29,23 +30,37 @@ const getCoupleDoc = async (email) => {
   }
 };
 
-const incrementCuddles = (docId, couple) => {
+const incrementCuddles = (docId, couple, name) => {
   const coupleRef = collection(db, "couples");
   const docRef = doc(coupleRef, docId);
   updateDoc(docRef, {
     cuddles: increment(1),
   });
   couple.cuddles += 1;
+
+  const fName = name.split(" ")[0];
+  sendTextMessage(`${fName} wants a cuddle!`);
+
   return "cuddles", couple.cuddles;
 };
 
-const incrementMissYou = (docId, couple) => {
+const incrementMissYou = (docId, couple, name) => {
   const coupleRef = collection(db, "couples");
   const docRef = doc(coupleRef, docId);
   updateDoc(docRef, {
     missYou: increment(1),
   });
   couple.missYou += 1;
+
+  const fName = name.split(" ")[0];
+  let pronoun = "they";
+  if (fName === "Olivia") {
+    pronoun = "she";
+  } else if (fName === "John") {
+    pronoun = "he";
+  }
+  sendTextMessage(`${fName} is thinking about how much ${pronoun} miss you!`);
+
   return "missYou", couple.missYou;
 };
 

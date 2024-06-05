@@ -105,7 +105,7 @@ function Dashboard(props) {
           <StatTile
             score={couple?.cuddles || 0}
             name="cuddles"
-            click={() => incrementCuddles(couple?.id, couple)}
+            click={() => incrementCuddles(couple?.id, couple, user.displayName)}
             setCouple={setCouple}
           />
           <StatTile
@@ -116,7 +116,7 @@ function Dashboard(props) {
           <StatTile
             score={couple?.missYou || 0}
             name="miss you"
-            click={() => incrementMissYou(couple?.id, couple)}
+            click={() => incrementMissYou(couple?.id, couple, user.displayName)}
             setCouple={setCouple}
           />
         </div>
