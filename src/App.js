@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth } from "./services/firebase";
 import { getCoupleRef } from "./services/auth";
-// import { getCookie, setCookie } from "./services/cookies";
 import "./App.css";
 
 import Dashboard from "./pages/Dashboard";
