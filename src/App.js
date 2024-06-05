@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { auth } from "./services/firebase";
+import { getCoupleRef } from "./services/auth";
+// import { getCookie, setCookie } from "./services/cookies";
+import "./App.css";
+
+import Dashboard from "./pages/Dashboard";
+import Signin from "./pages/Signin";
+import SearchBar from "./components/SearchBar";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  auth.onAuthStateChanged((user) => {
+    if (user != null && getCoupleRef(user.email)) {
+      setUser(user);
+    } else {
+      setUser(null);
+    }
+    setLoading(false);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+      <h1>John🐘Search</h1>
+      <SearchBar />
+      {user !== null && !loading && <Dashboard user={user} />}
+      {!user && !loading && <Signin />}
+      {loading && <div>Loading...</div>}
     </div>
   );
 }
