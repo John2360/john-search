@@ -59,7 +59,7 @@ const incrementMissYou = (docId, couple, name) => {
   } else if (fName === "John") {
     pronoun = "he";
   }
-  sendTextMessage(`${fName} is thinking about how much ${pronoun} miss you!`);
+  sendTextMessage(`${fName} is thinking about how much ${pronoun} misses you!`);
 
   return "missYou", couple.missYou;
 };
