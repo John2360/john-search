@@ -23,6 +23,7 @@ import GameTile from "../components/GameTile";
 import StatTile from "../components/StatTile";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SongTile from "../components/SongTile";
 
 function Dashboard(props) {
   const { user } = props;
@@ -118,6 +119,18 @@ function Dashboard(props) {
             name="miss you"
             click={() => incrementMissYou(couple?.id, couple, user.displayName)}
             setCouple={setCouple}
+          />
+        </div>
+        <div className="row">
+          <SongTile
+            docId={couple?.id}
+            currentPartner={`partner${partnerNumber}`}
+            partner={`partner2`}
+          />
+          <SongTile
+            docId={couple?.id}
+            currentPartner={`partner${partnerNumber}`}
+            partner={`partner1`}
           />
         </div>
         <div className="row">

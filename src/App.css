@@ -217,6 +217,116 @@ input {
   cursor: pointer;
 }
 
+.song-tile {
+  background-color: #f7f5f5;
+  color: black;
+  flex-direction: row;
+}
+
+.tile-song-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* gap: 1rem; */
+  width: 100%;
+
+}
+
+.tile-image {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.song-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.song-artist {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.song-play-button {
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-42%, -43%);
+
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+}
+
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 1;
+
+}
+
+.add-song-icon {
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+.tile-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.select-song-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.select-song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  z-index: 3;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.song-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f7f5f5;
+  color: black;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(199, 199, 199);
+}
+
+.select-song-list > .song-list-item {
+  border-radius: 0px;
+}
+
+.song-list-item > img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+
+}
+
 .game-title {
   font-size: 1.5rem;
   font-weight: 900;
@@ -272,6 +382,11 @@ input {
 }
 .pink {
   background-color: #f863e6;
+}
+
+.grey {
+  background-color: #f7f5f5 !important;
+  color: black !important;
 }
 
 .game-tile {

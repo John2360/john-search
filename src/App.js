@@ -11,13 +11,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  auth.onAuthStateChanged((user) => {
-    if (user != null && getCoupleRef(user.email)) {
+  auth.onAuthStateChanged(async (user) => {
+    if (user != null && (await getCoupleRef(user.email))) {
       setUser(user);
+      setLoading(false);
     } else {
       setUser(null);
     }
-    setLoading(false);
   });
 
   return (

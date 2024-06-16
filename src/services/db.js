@@ -8,8 +8,22 @@ import {
   increment,
   doc,
   updateDoc,
+  addDoc,
+  setDoc,
 } from "firebase/firestore";
 import { sendTextMessage } from "./message";
+Date.prototype.yyyymmdd = function () {
+  var mm = this.getMonth() + 1; // getMonth() is zero-based
+  var dd = this.getDate();
+
+  return [
+    this.getFullYear(),
+    (mm > 9 ? "" : "0") + mm,
+    (dd > 9 ? "" : "0") + dd,
+  ].join("");
+};
+// var date = new Date();
+// new Date().yyyymmdd();
 
 const getCoupleDoc = async (email) => {
   const coupleRef = collection(db, "couples");
@@ -122,6 +136,26 @@ const updateMilesApart = async (docId, miles) => {
   });
 };
 
+const getSongInfo = async (docId) => {
+  const coupleRef = collection(db, "couples");
+  const docRef = doc(coupleRef, docId);
+  const songsRef = collection(docRef, "songs");
+  const songRef = doc(songsRef, new Date().yyyymmdd());
+  const data = await getDoc(songRef);
+  if (data.exists()) {
+    return data.data();
+  }
+  return null;
+};
+
+const updateCurrentSong = async (docId, partner, song) => {
+  const date = new Date().yyyymmdd();
+
+  setDoc(doc(db, `couples/${docId}/songs`, date), {
+    [partner]: song,
+  });
+};
+
 export {
   getCoupleDoc,
   incrementCuddles,
@@ -131,4 +165,6 @@ export {
   updateCoords,
   updateCity,
   updateMilesApart,
+  getSongInfo,
+  updateCurrentSong,
 };
