@@ -150,10 +150,17 @@ const getSongInfo = async (docId, partner) => {
 
 const updateCurrentSong = async (docId, partner, song) => {
   const date = new Date().yyyymmdd();
-
-  setDoc(doc(db, `couples/${docId}/songs`, date), {
-    [partner]: song,
-  });
+  const songRef = doc(db, `couples/${docId}/songs`, date);
+  const songSnapshot = await getDoc(songRef);
+  if (songSnapshot.exists()) {
+    updateDoc(songRef, {
+      [partner]: song,
+    });
+  } else {
+    setDoc(doc(db, `couples/${docId}/songs`, date), {
+      [partner]: song,
+    });
+  }
 };
 
 export {
