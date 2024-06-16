@@ -13,17 +13,21 @@ function SongTile(props) {
   const audioRef = React.useRef(new Audio(song?.preview));
 
   useEffect(() => {
-    const fetch = async () => {
-      const song = await getSongInfo(docId);
+    const fetch = async (tilePartner) => {
+      const song = await getSongInfo(docId, tilePartner);
+      console.log("fetched song", song);
       if (!song) {
         return;
       }
-      console.log(song[partner]);
-      setSong(song[partner]);
+      setSong(song[tilePartner]);
       setStatus("song");
     };
     if (currentPartner == partner) {
-      fetch();
+      console.log("fetching current partner song");
+      fetch(currentPartner);
+    } else {
+      console.log("fetching partner song");
+      fetch(partner);
     }
   }, []);
 

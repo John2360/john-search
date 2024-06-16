@@ -136,13 +136,13 @@ const updateMilesApart = async (docId, miles) => {
   });
 };
 
-const getSongInfo = async (docId) => {
+const getSongInfo = async (docId, partner) => {
   const coupleRef = collection(db, "couples");
   const docRef = doc(coupleRef, docId);
   const songsRef = collection(docRef, "songs");
   const songRef = doc(songsRef, new Date().yyyymmdd());
   const data = await getDoc(songRef);
-  if (data.exists()) {
+  if (data.exists() && data.data()[partner]) {
     return data.data();
   }
   return null;
