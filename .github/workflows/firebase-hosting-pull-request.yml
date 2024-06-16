@@ -2,16 +2,24 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-'on': pull_request
+"on": pull_request
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Create .env file
+        run: |
+          echo "REACT_APP_BIG_DATA_CLOUD_API_KEY=${{ secrets.REACT_APP_BIG_DATA_CLOUD_API_KEY }}" >> .env
+          echo "REACT_APP_TIMEZONE_API_KEY=${{ secrets.REACT_APP_TIMEZONE_API_KEY }}" >> .env
+          echo "REACT_APP_FIREBASE_API=${{ secrets.REACT_APP_FIREBASE_API }}" >> .env
+          echo "REACT_APP_TEXT=${{ secrets.REACT_APP_TEXT }}" >> .env
+          echo "REACT_APP_SPOTIFY_CLIENT_ID=${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}" >> .env
+          echo "REACT_APP_SPOTIFY_CLIENT_SECRET=${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}" >> .env
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JOHN_SEARCH_9E076 }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JOHN_SEARCH_9E076 }}"
           projectId: john-search-9e076
