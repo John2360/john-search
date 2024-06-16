@@ -7,7 +7,7 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-const {onRequest} = require("firebase-functions/v2/https");
+const { onRequest } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 const logger = require("firebase-functions/logger");
 const nodemailer = require("nodemailer");
@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendEmail = onRequest({cors: true}, async (request, response) => {
+exports.sendEmail = onRequest({ cors: true }, async (request, response) => {
   if (!request.body.message) {
     logger.error("Request did not include message.");
     response.status(400).send("Missing message in request body.");

@@ -221,6 +221,7 @@ input {
   background-color: #f7f5f5;
   color: black;
   flex-direction: row;
+  cursor: default !important;
 }
 
 .tile-song-info {
@@ -255,6 +256,7 @@ input {
   left: 50%;
   top: 50%;
   transform: translate(-42%, -43%);
+  cursor: pointer;
 
   font-size: 2rem;
   font-weight: 900;

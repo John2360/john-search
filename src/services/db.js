@@ -8,7 +8,6 @@ import {
   increment,
   doc,
   updateDoc,
-  addDoc,
   setDoc,
 } from "firebase/firestore";
 import { sendTextMessage } from "./message";

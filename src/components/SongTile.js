@@ -15,7 +15,6 @@ function SongTile(props) {
   useEffect(() => {
     const fetch = async (tilePartner) => {
       const song = await getSongInfo(docId, tilePartner);
-      console.log("fetched song", song);
       if (!song) {
         return;
       }
@@ -23,10 +22,8 @@ function SongTile(props) {
       setStatus("song");
     };
     if (currentPartner == partner) {
-      console.log("fetching current partner song");
       fetch(currentPartner);
     } else {
-      console.log("fetching partner song");
       fetch(partner);
     }
   }, []);

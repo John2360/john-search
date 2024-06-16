@@ -6,7 +6,7 @@ function StatTile(props) {
   const handleClick = () => {
     if (!click) return;
     const { name, val } = click();
-    setCouple((prev) => ({ ...prev, name: val }));
+    setCouple((prev) => ({ ...prev, [name]: val }));
   };
 
   return (
