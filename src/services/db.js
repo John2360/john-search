@@ -162,6 +162,24 @@ const updateCurrentSong = async (docId, partner, song) => {
   }
 };
 
+const cleanState = async (docId) => {
+  const coupleRef = doc(db, `couples/${docId}`);
+  if (coupleRef.exists()) {
+    updateDoc(coupleRef, {
+      flickMini: {
+        player1: 0,
+        player2: 0,
+      },
+      punchBuggy: {
+        player1: 0,
+        player2: 0,
+      },
+      missYou: 0,
+      cuddles: 0,
+    });
+  }
+};
+
 export {
   getCoupleDoc,
   incrementCuddles,
@@ -173,4 +191,5 @@ export {
   updateMilesApart,
   getSongInfo,
   updateCurrentSong,
+  cleanState,
 };

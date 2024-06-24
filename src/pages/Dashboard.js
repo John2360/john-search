@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  cleanState,
   getCoupleDoc,
   incrementCuddles,
   incrementMissYou,
@@ -53,8 +54,8 @@ function Dashboard(props) {
       const newCords = await getLocation();
 
       if (
-        distance(couple[`cords${partnerNumber}`], newCords) > 10 ||
-        !couple[`cords${partnerNumber}`]
+        !couple[`cords${partnerNumber}`] ||
+        distance(couple[`cords${partnerNumber}`], newCords) > 5
       ) {
         updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
         updateMilesApart(
@@ -64,7 +65,15 @@ function Dashboard(props) {
 
         const city = await getCity(newCords.lat, newCords.lng);
         const timezone = await getTimezone(newCords.lat, newCords.lng);
+        setCouple((prev) => ({
+          ...prev,
+          [`city${partnerNumber}`]: { city, timezone },
+        }));
         updateCity(couple?.id, `city${partnerNumber}`, city, timezone);
+
+        if (distance(couple["cords1"], couple["cords2"]) < 5) {
+          cleanState(couple?.id);
+        }
       }
     };
     fetch();
@@ -110,7 +119,12 @@ function Dashboard(props) {
             setCouple={setCouple}
           />
           <StatTile
-            score={daysFromToday(couple?.daysLeft) || 0}
+            score={
+              daysFromToday(couple?.daysLeft) ||
+              (daysFromToday(couple?.daysLeft) > 0
+                ? daysFromToday(couple?.daysLeft)
+                : 0)
+            }
             name="days left"
             setCouple={setCouple}
           />
