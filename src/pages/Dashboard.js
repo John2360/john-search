@@ -52,12 +52,15 @@ function Dashboard(props) {
     const fetch = async () => {
       // Update city
       const newCords = await getLocation();
+      console.log(`newCords: ${newCords.lat}, ${newCords.lng}`);
+      console.log(
+        `distance: ${distance(couple[`cords${partnerNumber}`], newCords)} `
+      );
 
       if (
         !couple[`cords${partnerNumber}`] ||
         distance(couple[`cords${partnerNumber}`], newCords) > 5
       ) {
-        updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
         updateMilesApart(
           couple?.id,
           parseInt(distance(newCords, couple.cords2))
@@ -65,11 +68,19 @@ function Dashboard(props) {
 
         const city = await getCity(newCords.lat, newCords.lng);
         const timezone = await getTimezone(newCords.lat, newCords.lng);
+        console.log(`city: ${city}`);
+        console.log(`timezone: ${timezone}`);
         setCouple((prev) => ({
           ...prev,
           [`city${partnerNumber}`]: { city, timezone },
         }));
         updateCity(couple?.id, `city${partnerNumber}`, city, timezone);
+        updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
+        setCouple((prev) => ({
+          ...prev,
+          [`cords${partnerNumber}`]: newCords,
+        }));
+        console.log(`updated city${partnerNumber}`);
 
         if (distance(couple["cords1"], couple["cords2"]) < 5) {
           cleanState(couple?.id);

@@ -1,3 +1,4 @@
+import axios from "axios";
 const getLocation = () => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -18,21 +19,22 @@ const getLocation = () => {
 };
 
 const getCity = async (lat, lng) => {
-  const response = await fetch(
+  const response = await axios.get(
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${process.env.REACT_APP_BIG_DATA_CLOUD_API_KEY}`
   );
-  const data = await response.json();
+  const data = response.data;
   const city = data.city;
   return city;
 };
 
 const getTimezone = async (lat, lng) => {
-  const timezoneResponse = await fetch(
-    `http://api.timezonedb.com/v2.1/get-time-zone?&key=${process.env.REACT_APP_TIMEZONE_API_KEY}&format=json&by=position&lat=${lat}&lng=${lng}`
+  const timestamp = Date.now().toString().slice(0, 10);
+  const timezoneResponse = await axios.get(
+    `https://maps.googleapis.com/maps/api/timezone/json?location=${lat}%2C${lng}&timestamp=${timestamp}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
   );
 
-  const timezoneData = await timezoneResponse.json();
-  const timezone = timezoneData.zoneName;
+  const timezoneData = timezoneResponse.data;
+  const timezone = timezoneData.timeZoneId;
   return timezone;
 };
 
