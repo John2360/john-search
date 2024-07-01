@@ -74,17 +74,17 @@ function Dashboard(props) {
           ...prev,
           [`city${partnerNumber}`]: { city, timezone },
         }));
-        updateCity(couple?.id, `city${partnerNumber}`, city, timezone);
-        updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
+        await updateCity(couple?.id, `city${partnerNumber}`, city, timezone);
+        await updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
+
+        if (distance(couple["cords1"], couple["cords2"]) < 5) {
+          await cleanState(couple?.id);
+        }
         setCouple((prev) => ({
           ...prev,
           [`cords${partnerNumber}`]: newCords,
         }));
         console.log(`updated city${partnerNumber}`);
-
-        if (distance(couple["cords1"], couple["cords2"]) < 5) {
-          cleanState(couple?.id);
-        }
       }
     };
     fetch();
