@@ -49,6 +49,7 @@ function Dashboard(props) {
     if (!couple) {
       return;
     }
+
     const fetch = async () => {
       // Update city
       const newCords = await getLocation();
@@ -61,13 +62,9 @@ function Dashboard(props) {
         !couple[`cords${partnerNumber}`] ||
         distance(couple[`cords${partnerNumber}`], newCords) > 5
       ) {
-        updateMilesApart(
-          couple?.id,
-          parseInt(distance(newCords, couple.cords2))
-        );
-
         const city = await getCity(newCords.lat, newCords.lng);
         const timezone = await getTimezone(newCords.lat, newCords.lng);
+        console.log(timezone);
         console.log(`city: ${city}`);
         console.log(`timezone: ${timezone}`);
         setCouple((prev) => ({
@@ -75,6 +72,10 @@ function Dashboard(props) {
           [`city${partnerNumber}`]: { city, timezone },
         }));
         await updateCity(couple?.id, `city${partnerNumber}`, city, timezone);
+        await updateMilesApart(
+          couple?.id,
+          parseInt(distance(newCords, couple.cords2))
+        );
         await updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
 
         if (distance(couple["cords1"], couple["cords2"]) < 5) {
@@ -87,6 +88,7 @@ function Dashboard(props) {
         console.log(`updated city${partnerNumber}`);
       }
     };
+
     fetch();
   }, [couple]);
 
