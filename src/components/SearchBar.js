@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    const inputElement = document.querySelector(".row.search-box input");
-    inputElement.focus();
-  }, []);
+  // useEffect(() => {
+  //   const inputElement = document.querySelector(".row.search-box input");
+  //   inputElement.focus();
+  // }, []);
 
   const search = () => {
     window.location = `https://www.google.com/search?q=${searchTerm}`;
