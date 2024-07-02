@@ -19,6 +19,7 @@ jobs:
           echo "REACT_APP_TEXT=${{ secrets.REACT_APP_TEXT }}" >> .env
           echo "REACT_APP_SPOTIFY_CLIENT_ID=${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}" >> .env
           echo "REACT_APP_SPOTIFY_CLIENT_SECRET=${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}" >> .env
+          echo "REACT_APP_GOOGLE_API_KEY=${{ secrets.REACT_APP_GOOGLE_API_KEY }}" >> .env
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

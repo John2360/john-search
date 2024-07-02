@@ -34,7 +34,6 @@ const getTimezone = async (lat, lng) => {
   );
 
   const timezoneData = timezoneResponse.data;
-  console.log(timezoneData);
   const timezone = timezoneData.timeZoneId;
   return timezone;
 };
