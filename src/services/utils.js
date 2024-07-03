@@ -10,10 +10,10 @@ const daysFromToday = (date) => {
 };
 
 const getBackgroundImage = (city, time, rain) => {
-  const cityString = city.replace(/\s/g, "").toLowerCase();
+  const cityString = city.replace(/\s/g, "").toLowerCase().replace("city", "");
   const night = time > 18 || time < 6 ? true : false;
   const isRain = rain > 0 ? true : false;
-
+  console.log(cityString);
   if (!["newyork", "sanfrancisco"].includes(cityString)) {
     return null;
   }
