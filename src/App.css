@@ -124,6 +124,7 @@ h1 {
   .license-plate-map {
     width: 100% !important;
     height: 100%;
+    min-height: 200px !important;
   }
 }
 
