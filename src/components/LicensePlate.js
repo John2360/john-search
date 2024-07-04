@@ -8,7 +8,16 @@ function LicensePlate(props) {
     <div className="big-tile game-tile license-plate-container">
       <div className="row">
         <div className="license-plate-map">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1000 600"
+            style={{
+              height: "100%",
+              width: "100%",
+              overflowX: "auto",
+              overflowY: "auto",
+            }}
+          >
             {states["paths"].map((state) => (
               <path
                 key={state.id}
