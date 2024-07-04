@@ -5,7 +5,7 @@ import { updateLicensePlate } from "../services/db";
 function LicensePlate(props) {
   const { docId, gameId, gameData, activePlayer, setCouple } = props;
   return (
-    <div className="big-tile game-tile">
+    <div className="big-tile game-tile license-plate-container">
       <div className="row">
         <div className="license-plate-map">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">

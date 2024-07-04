@@ -121,6 +121,10 @@ h1 {
   button {
     width: 100% !important;
   }
+  .license-plate-map {
+    width: 100% !important;
+    height: 100%;
+  }
 }
 
 /* CSS */
@@ -512,3 +516,8 @@ select:focus {
   font-size: 3rem;
   font-weight: 900;
 }
+
+.license-plate-container {
+  height: 100% !important;
+}
+
