@@ -9,6 +9,7 @@ import {
   doc,
   updateDoc,
   setDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { sendTextMessage } from "./message";
 Date.prototype.yyyymmdd = function () {
@@ -162,8 +163,16 @@ const updateCurrentSong = async (docId, partner, song) => {
   }
 };
 
+const updateLicensePlate = async (docId, partner, state) => {
+  const coupleRef = doc(db, `couples/${docId}`);
+  updateDoc(coupleRef, {
+    [`licensePlate.${partner}`]: arrayUnion(state),
+  });
+};
+
 const cleanState = async (docId) => {
   const coupleRef = doc(db, `couples/${docId}`);
+
   if (coupleRef.exists()) {
     updateDoc(coupleRef, {
       flickMini: {
@@ -192,4 +201,5 @@ export {
   getSongInfo,
   updateCurrentSong,
   cleanState,
+  updateLicensePlate,
 };

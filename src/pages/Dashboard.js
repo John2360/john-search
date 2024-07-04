@@ -25,6 +25,7 @@ import StatTile from "../components/StatTile";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import SongTile from "../components/SongTile";
+import LicensePlate from "../components/LicensePlate";
 
 function Dashboard(props) {
   const { user } = props;
@@ -158,6 +159,18 @@ function Dashboard(props) {
             docId={couple?.id}
             currentPartner={`partner${partnerNumber}`}
             partner={`partner1`}
+          />
+        </div>
+        <div className="row">
+          <LicensePlate
+            docId={couple?.id}
+            gameId="licensePlate"
+            gameData={couple?.licensePlate}
+            activePlayer={
+              user?.email === couple?.partner1 ? "player1" : "player2"
+            }
+            setCouple={setCouple}
+            couple={couple}
           />
         </div>
         <div className="row">
