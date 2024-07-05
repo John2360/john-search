@@ -172,21 +172,66 @@ const updateLicensePlate = async (docId, partner, state) => {
 
 const cleanState = async (docId) => {
   const coupleRef = doc(db, `couples/${docId}`);
+  const coupleSnapshot = await getDoc(coupleRef);
+  let player1Score = 0;
+  let player2Score = 0;
+  if (coupleSnapshot.exists()) {
+    if (
+      coupleSnapshot.data().flickMini.player1 >
+      coupleSnapshot.data().flickMini.player2
+    ) {
+      player1Score += 1;
+    } else if (
+      coupleSnapshot.data().flickMini.player1 <
+      coupleSnapshot.data().flickMini.player2
+    ) {
+      player2Score += 1;
+    }
 
-  if (coupleRef.exists()) {
-    updateDoc(coupleRef, {
-      flickMini: {
-        player1: 0,
-        player2: 0,
-      },
-      punchBuggy: {
-        player1: 0,
-        player2: 0,
-      },
-      missYou: 0,
-      cuddles: 0,
-    });
+    if (
+      coupleSnapshot.data().punchBuggy.player1 >
+      coupleSnapshot.data().punchBuggy.player2
+    ) {
+      player1Score += 1;
+    } else if (
+      coupleSnapshot.data().punchBuggy.player1 <
+      coupleSnapshot.data().punchBuggy.player2
+    ) {
+      player2Score += 1;
+    }
+
+    if (
+      coupleSnapshot.data().licensePlate.player1.length >
+      coupleSnapshot.data().licensePlate.player2.length
+    ) {
+      player1Score += 1;
+    } else if (
+      coupleSnapshot.data().licensePlate.player1.length <
+      coupleSnapshot.data().licensePlate.player2.length
+    ) {
+      player2Score += 1;
+    }
   }
+  updateDoc(coupleRef, {
+    flickMini: {
+      player1: 0,
+      player2: 0,
+    },
+    punchBuggy: {
+      player1: 0,
+      player2: 0,
+    },
+    missYou: 0,
+    cuddles: 0,
+    licensePlate: {
+      player1: [],
+      player2: [],
+    },
+    leadboard: {
+      player1: increment(player1Score),
+      player2: increment(player2Score),
+    },
+  });
 };
 
 export {

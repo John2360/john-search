@@ -3,7 +3,8 @@ import states from "../assets/states.json";
 import { updateLicensePlate } from "../services/db";
 
 function LicensePlate(props) {
-  const { docId, gameId, gameData, activePlayer, setCouple } = props;
+  const { docId, gameId, gameData, player1, player2, activePlayer, setCouple } =
+    props;
   return (
     <div className="big-tile game-tile license-plate-container">
       <div className="row">
@@ -52,11 +53,11 @@ function LicensePlate(props) {
           <div className="player-score">
             <div className="player">
               <div className="score">{gameData.player1.length}</div>
-              <div className="name">John</div>
+              <div className="name">{player1}</div>
             </div>
             <div className="player">
               <div className="score">{gameData.player2.length}</div>
-              <div className="name">Olivia</div>
+              <div className="name">{player2}</div>
             </div>
           </div>
         </div>
