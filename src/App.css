@@ -480,6 +480,20 @@ select:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.remove-tool {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.license-plate-map > .active {
+  color: #ef5a5a;
+
 }
 
 .license-plate-score > .total {
@@ -521,6 +535,7 @@ select:focus {
 .license-plate-container {
   height: 100% !important;
 }
+
 
 
 .leaderboard {

@@ -10,6 +10,7 @@ import {
   updateDoc,
   setDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { sendTextMessage } from "./message";
 Date.prototype.yyyymmdd = function () {
@@ -170,6 +171,13 @@ const updateLicensePlate = async (docId, partner, state) => {
   });
 };
 
+const removeLicensePlate = async (docId, partner, state) => {
+  const coupleRef = doc(db, `couples/${docId}`);
+  updateDoc(coupleRef, {
+    [`licensePlate.${partner}`]: arrayRemove(state),
+  });
+};
+
 const cleanState = async (docId) => {
   const coupleRef = doc(db, `couples/${docId}`);
   const coupleSnapshot = await getDoc(coupleRef);
@@ -247,4 +255,5 @@ export {
   updateCurrentSong,
   cleanState,
   updateLicensePlate,
+  removeLicensePlate,
 };
