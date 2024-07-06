@@ -62,7 +62,6 @@ function SongTile(props) {
       preview: song.preview_url,
       url: song.external_urls.spotify,
     };
-    console.log(songData);
     updateCurrentSong(docId, partner, songData);
     setSong(songData);
     setSongList([]);

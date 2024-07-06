@@ -306,6 +306,7 @@ input {
   position: absolute;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  max-width: 250px;
 }
 
 .song-list-item {
@@ -324,6 +325,11 @@ input {
 
 .select-song-list > .song-list-item {
   border-radius: 0px;
+}
+
+.select-song > input {
+  width: 250px !important;
+
 }
 
 .song-list-item > img {
@@ -547,6 +553,8 @@ select:focus {
   cursor: default !important;
 
   position: relative;
+
+  z-index: -1 !important;
 }
 
 .leaderboard > .players {
