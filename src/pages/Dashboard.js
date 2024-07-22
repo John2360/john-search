@@ -135,10 +135,9 @@ function Dashboard(props) {
           />
           <StatTile
             score={
-              daysFromToday(couple?.daysLeft) ||
-              (daysFromToday(couple?.daysLeft) > 0
+              daysFromToday(couple?.daysLeft) > 0
                 ? daysFromToday(couple?.daysLeft)
-                : 0)
+                : 0
             }
             name="days left"
             setCouple={setCouple}
