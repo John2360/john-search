@@ -79,6 +79,10 @@ function Dashboard(props) {
           parseInt(distance(newCords, couple.cords2))
         );
         await updateCoords(couple?.id, `cords${partnerNumber}`, newCords);
+        setCouple((prev) => ({
+          ...prev,
+          [`cords${partnerNumber}`]: newCords,
+        }));
 
         if (distance(couple["cords1"], couple["cords2"]) < 5) {
           await cleanState(couple?.id);
