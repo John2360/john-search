@@ -235,7 +235,7 @@ const cleanState = async (docId) => {
       player1: [],
       player2: [],
     },
-    leaderBoard: {
+    leaderboard: {
       player1: increment(player1Score),
       player2: increment(player2Score),
     },
